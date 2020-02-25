@@ -1,0 +1,6 @@
+[submodule "external/order-pp"]
+	path = external/order-pp
+	url = https://github.com/rofl0r/order-pp.git
+[submodule "external/chaos-pp"]
+	path = external/chaos-pp
+	url = https://github.com/rofl0r/chaos-pp.git

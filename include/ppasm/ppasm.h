@@ -4,6 +4,7 @@
 #include "x86_register_syms.h"
 #include "indirect_operand.h"
 #include "keywords.h"
+#include "util.h"
 
 
 #define ORDER_PP_DEF_0inc \
@@ -66,12 +67,14 @@
 #define ORDER_PP_DEF_0ppasm_expand_macro \
   ORDER_PP_FN(8fn(8M, 8E, \
 		  8let((8R, 0ppasm_eval(8M, 8E)), \
-		       8seq_fold(8fn(8A, 8O, 8seq_join(8A, 8ap(8O, 8E))),	\
-				 8nil,					\
-				 8cond(\
-				       (8is_tuple(8R), 8tuple_to_seq(8R)) \
-				       (8is_seq(8R), 8R) \
-				       (8else, 8seq(8R)))))))
+		  	   8cond((8is_fn(8R), 8ap(8R, 8E)) \
+				 	 (8else, 8seq_fold(8fn(8A, 8O, 8seq_join(8A, 8ap(8O, 8E))),	\
+										8nil,					\
+										8cond(\
+											(8is_tuple(8R), 8tuple_to_seq(8R)) \
+											(8is_seq(8R), 8R) \
+											(8else, 8seq(8R)))))) \
+									)))
 
 #define ORDER_PP_DEF_0ppasm_expand_macro_seq \
   ORDER_PP_FN(8fn(8S, 8E, \

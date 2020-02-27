@@ -1,15 +1,21 @@
 #include "order/interpreter.h"
 
+#include "arithmatic/based_int.h"
+#include "arithmatic/binary.h"
+
 #include "byte_escapes.h"
-#include "x86_register_syms.h"
 #include "indirect_operand.h"
 #include "keywords.h"
+#include "typing.h"
 #include "util.h"
+#include "x86_register_syms.h"
 
 
 #define ORDER_PP_DEF_0inc \
   ORDER_PP_FN(8fn(8R, 8E,			\
-  				8let((8S, 8cat(8(PPASM_REGISTER_SIZE_), 8R))(8I, 8cat(8(PPASM_REGISTER_INDEX_), 8R))(8B, 8cat(8(PPASM_REGISTER_BLOCK_), 8R)), \
+  				8let((8S, 8cat(8(PPASM_REGISTER_SIZE_), 8R)) \
+					   (8I, 8cat(8(PPASM_REGISTER_INDEX_), 8R)) \
+					   (8B, 8cat(8(PPASM_REGISTER_BLOCK_), 8R)), \
 				  	8cond( \
 						  (8and(8equal(8S, 64), 8equal(8B, 0)), 8seq(8to_lit(8nat(7,2)), 8to_lit(8nat(2,5,5)), 8to_lit(8add(8nat(1,9,2), 8I)))) \
 						  (8and(8equal(8S, 32), 8equal(8B, 0)), 8seq(8to_lit(8nat(2,5,5)), 8to_lit(8add(8nat(1,9,2), 8I)))) \
@@ -26,8 +32,14 @@
 		  8seq(8to_lit(8nat(1, 0)))))
 
 #define ORDER_PP_DEF_0mov \
-  ORDER_PP_FN(8fn(8A, 8B, 8E,			\
-		  8seq(8B)))
+  ORDER_PP_FN(8fn(8A, 8B, 8E, \
+				  8cond( \
+						(8and(0ppasm_is_register(8A), 0ppasm_is_register(8B)), 8seq(8(reg to reg))) \
+						(8and(0ppasm_is_register(8A), 0ppasm_is_indop(8B)), 8seq(8(mem to reg))) \
+						(8and(0ppasm_is_indop(8A), 0ppasm_is_register(8B)), 8seq(8(reg to mem))) \
+						(8and(0ppasm_is_register(8A), 8is_num(8B)), 8seq(8(const to reg))) \
+						(8and(0ppasm_is_indop(8A), 8is_num(8B)), 8seq(8(const to mem))) \
+						(8else, 8exit(0)))))
 
 #define ORDER_PP_DEF_0ret \
   ORDER_PP_FN(8fn(8X, 8E, 				\

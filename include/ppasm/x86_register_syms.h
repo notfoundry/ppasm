@@ -174,3 +174,13 @@
 #define PPASM_REGISTER_SIZE_r15d 32
 #define PPASM_REGISTER_INDEX_r15d 7
 #define PPASM_REGISTER_BLOCK_r15d 1
+
+
+#define ORDER_PP_DEF_0ppasm_is_register \
+    ORDER_PP_FN(8fn(8X, \
+                    8and(8is_sym(8X), \
+                         8seq_exists(8same(8X), \
+                                     8((rax)(eax)(rbx)(ebx)(rcx)(ecx)(rdx)(edx) \
+                                       (rsp)(esp)(rbp)(ebp)(rsi)(esi)(rdi)(edi) \
+                                       (r8)(r8d)(r9)(r9d)(r10)(r10d)(r11)(r11d) \
+                                       (r12)(r12d)(r13)(r13d)(r14)(r14d)(r15)(r15d))))))

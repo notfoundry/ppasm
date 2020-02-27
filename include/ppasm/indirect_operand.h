@@ -1,4 +1,21 @@
-#include "order/interpreter.h"
+
+#define ORDER_PP_DEF_0byte ORDER_PP_FN(8fn(8T, 0typed(8(0ppasm_byte_indop), 0ppasm_indop_parse(8T))))
+#define ORDER_PP_SYM_0ppasm_byte_indop(...) __VA_ARGS__
+
+#define ORDER_PP_DEF_0word ORDER_PP_FN(8fn(8T, 0typed(8(0ppasm_word_indop), 0ppasm_indop_parse(8T))))
+#define ORDER_PP_SYM_0ppasm_word_indop(...) __VA_ARGS__
+
+#define ORDER_PP_DEF_0dword ORDER_PP_FN(8fn(8T, 0typed(8(0ppasm_dword_indop), 0ppasm_indop_parse(8T))))
+#define ORDER_PP_SYM_0ppasm_dword_indop(...) __VA_ARGS__
+
+#define ORDER_PP_DEF_0qword ORDER_PP_FN(8fn(8T, 0typed(8(0ppasm_qword_indop), 0ppasm_indop_parse(8T))))
+#define ORDER_PP_SYM_0ppasm_qword_indop(...) __VA_ARGS__
+
+#define ORDER_PP_DEF_0ppasm_is_indop \
+  ORDER_PP_FN(8fn(8X, \
+				  8seq_exists(8fn(8S, 0has_type(8S, 8X)), \
+								  8seq(8(0ppasm_byte_indop), 8(0ppasm_word_indop), 8(0ppasm_dword_indop), 8(0ppasm_qword_indop)))))
+
 
 #define ORDER_PP_DEF_0ppasm_indop_env_has \
   ORDER_PP_FN(8fn(8S, 8E, \
@@ -65,16 +82,3 @@
 				      (8else, 8exit(0)))),		\
 			    8env_nil,			\
 			    8tuple_to_seq(8T))))
-
-
-#define ORDER_PP_DEF_0byte ORDER_PP_FN(8fn(8T, 8seq(8(0byte_tag), 0ppasm_indop_parse(8T))))
-#define ORDER_PP_SYM_0byte_tag(...) __VA_ARGS__
-
-#define ORDER_PP_DEF_0word ORDER_PP_FN(8fn(8T, 8seq(8(0word_tag), 0ppasm_indop_parse(8T))))
-#define ORDER_PP_SYM_0word_tag(...) __VA_ARGS__
-
-#define ORDER_PP_DEF_0dword ORDER_PP_FN(8fn(8T, 8seq(8(0dword_tag), 0ppasm_indop_parse(8T))))
-#define ORDER_PP_SYM_0dword_tag(...) __VA_ARGS__
-
-#define ORDER_PP_DEF_0qword ORDER_PP_FN(8fn(8T, 8seq(8(0qword_tag), 0ppasm_indop_parse(8T))))
-#define ORDER_PP_SYM_0qword_tag(...) __VA_ARGS__

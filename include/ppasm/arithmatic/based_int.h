@@ -19,9 +19,10 @@
 
 #define ORDER_PP_DEF_0based_to_nat_impl \
   ORDER_PP_FN(8fn(8N, 8B, 8E, 8A,       \
-		  8if(8seq_is_nil(8N), \
-		      8A, \
-		      0based_to_nat_impl(8seq_tail(8N), 8B, 8inc(8E), 8add(8mul(8seq_head(8N), 8pow(8B, 8E)), 8A)))))
+				  8if(8seq_is_nil(8N), \
+					  8A, \
+					  0based_to_nat_impl(8seq_tail(8N), 8B, 8inc(8E), \
+										 8if(8is_0(8seq_head(8N)), 8A, 8add(8mul(8seq_head(8N), 8pow(8B, 8E)), 8A))))))
 
 #define ORDER_PP_DEF_0based_to_nat \
   ORDER_PP_FN(8fn(8N, \

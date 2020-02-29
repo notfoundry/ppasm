@@ -1,11 +1,6 @@
 # ppasm
 Are you tired of executing your C compiler on your source code to get your binaries? With `ppasm`'s **fully-preprocessor x86_64 assembler**, you can skip the compiler and move straight to the action!
 
-## Table of Contents
-- [Overview](#overview)
-- [Tutorial](#tutorial)
-
-## Overview
 Let's take a look at some of `ppasm`'s killer features:
 
 | ppasm | literally any C compiler |
@@ -14,6 +9,13 @@ Let's take a look at some of `ppasm`'s killer features:
 | No types at all, maximum productivity! | Static type system, kills prototyping speed... |
 | Full-blown functional language for macros! | Crappy old macro system, a complete pain... |
 | Unlimited flexibility, anything is possible! | Restricted semantics, C standard controls you... |
+
+## Table of Contents
+- [Overview](#overview)
+- [Tutorial](#tutorial)
+
+## Overview
+TODO: Comparison with NASM syntax
 
 ## Tutorial
 Let's take a simple example of a factorial. As a C program, this might look like:

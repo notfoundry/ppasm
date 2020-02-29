@@ -14,7 +14,7 @@
 
 #define ORDER_PP_DEF_0signed_int_num \
   ORDER_PP_FN(8fn(8N, 8seq_at(1, 0untyped(8N))))
-  
+
 
 #define ORDER_PP_DEF_0negative \
   ORDER_PP_FN(8fn(8X, 0signed_int(8X, 8true)))

@@ -17,21 +17,15 @@
 								  8seq(8(0ppasm_byte_indop), 8(0ppasm_word_indop), 8(0ppasm_dword_indop), 8(0ppasm_qword_indop)))))
 
 
-#define ORDER_PP_DEF_0ppasm_indop_env_has \
-  ORDER_PP_FN(8fn(8S, 8E, \
-		  8let((8R, 8env_to_seq_of_pairs(8E)),	\
-		       8let((8F, 8seq_filter(8fn(8P, 8same(8tuple_at_0(8P), 8S)), 8R)), \
-			    8isnt_nil(8F)))))
-
-#define ORDER_PP_DEF_0ppasm_indop_env_has_offset ORDER_PP_FN(8fn(8E, 0ppasm_indop_env_has(8(8O), 8E)))
+#define ORDER_PP_DEF_0ppasm_indop_env_has_offset ORDER_PP_FN(8fn(8E, 8env_has(8(8O), 8E)))
 #define ORDER_PP_DEF_0ppasm_indop_env_set_offset ORDER_PP_FN(8fn(8O, 8E, 8env_bind(8(8O), 8E, 8O)))
 #define ORDER_PP_DEF_0ppasm_indop_env_get_offset ORDER_PP_FN(8fn(8E, 8env_ref(8(8O), 8E)))
 
-#define ORDER_PP_DEF_0ppasm_indop_env_has_base ORDER_PP_FN(8fn(8E, 0ppasm_indop_env_has(8(8B), 8E)))
+#define ORDER_PP_DEF_0ppasm_indop_env_has_base ORDER_PP_FN(8fn(8E, 8env_has(8(8B), 8E)))
 #define ORDER_PP_DEF_0ppasm_indop_env_set_base ORDER_PP_FN(8fn(8B, 8E, 8env_bind(8(8B), 8E, 8B)))
 #define ORDER_PP_DEF_0ppasm_indop_env_get_base ORDER_PP_FN(8fn(8E, 8env_ref(8(8B), 8E)))
 
-#define ORDER_PP_DEF_0ppasm_indop_env_has_index ORDER_PP_FN(8fn(8E, 0ppasm_indop_env_has(8(8I), 8E)))
+#define ORDER_PP_DEF_0ppasm_indop_env_has_index ORDER_PP_FN(8fn(8E, 8env_has(8(8I), 8E)))
 #define ORDER_PP_DEF_0ppasm_indop_env_set_index ORDER_PP_FN(8fn(8R, 8S, 8E, 8env_bind(8(8I), 8E, 8seq(8R, 8S))))
 #define ORDER_PP_DEF_0ppasm_indop_env_get_index ORDER_PP_FN(8fn(8E, 8env_ref(8(8I), 8E)))
 

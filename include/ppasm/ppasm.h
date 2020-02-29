@@ -267,9 +267,9 @@
 #define ORDER_PP_DEF_0ppasm_expand_macro \
   ORDER_PP_FN(8fn(8M, 8C, \
 		  8let((8R, 0ppasm_eval(8M)), \
-		  	   8cond((8is_fn(8R), 8ap(8R, 8C)) \
-				 	 (8else, 8seq_fold(8fn(8A, 8O, 8seq_join(8A, 8ap(8O, 8C))),	\
-										8seq,					\
+		  	   8cond((8is_fn(8R), 0ppasm_asm_ctx_add_entry(8ap(8R, 8C), 8C)) \
+				 	 (8else, 8seq_fold(8fn(8A, 8O, 0ppasm_asm_ctx_add_entry(8ap(8O, 8C), 8A)),	\
+										8C,					\
 										8cond(\
 											(8is_tuple(8R), 8tuple_to_seq(8R)) \
 											(8is_seq(8R), 8R) \

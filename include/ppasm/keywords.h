@@ -1,4 +1,9 @@
+
+#define nop 0nop(8nil)
+
 #define inc(reg) 0inc(8(reg))
+
+#define dec(reg) 0dec(8(reg))
 
 #define push(reg) 0push(8(reg))
 

@@ -2,5 +2,7 @@
 
 assemble (
     jmp (8X),
-    label (8X, inc (eax))
+    label (8X, inc (eax)),
+    nop,
+    dec (rax)
 )

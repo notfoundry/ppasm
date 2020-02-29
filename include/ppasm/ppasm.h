@@ -53,6 +53,7 @@
 						  (0is_signed_int(8T), 0ppasm_insn_jmp_to_offset(8T, 8C)) \
 						  (8else, 8exit(0)))))
 
+
 #define ORDER_PP_DEF_0ppasm_insn_inc_generate_bytes_and_size \
 	ORDER_PP_FN(8fn(8R, 8C, \
 					8let((8S, 8cat(8(PPASM_REGISTER_SIZE_), 8R)) \
@@ -73,6 +74,29 @@
   ORDER_PP_FN(8fn(8R, 8C,			\
 				  8let((8D, 0ppasm_insn_inc_generate_bytes_and_size(8R, 8C)), \
 					   0ppasm_asm_ctx_entry(8fn(8R, 8tuple_at_0(8D)), 8tuple_at_1(8D)))))
+  
+  
+  #define ORDER_PP_DEF_0ppasm_insn_dec_generate_bytes_and_size \
+	ORDER_PP_FN(8fn(8R, 8C, \
+					8let((8S, 8cat(8(PPASM_REGISTER_SIZE_), 8R)) \
+					   	 (8I, 8cat(8(PPASM_REGISTER_INDEX_), 8R)) \
+					   	 (8B, 8cat(8(PPASM_REGISTER_BLOCK_), 8R)), \
+				  	8cond( \
+						  (8and(8equal(8S, 64), 8equal(8B, 0)), \
+						   8pair(8seq(8to_lit(8nat(7,2)), 8to_lit(8nat(2,5,5)), 8to_lit(8add(8nat(2,0,0), 8I))), 3)) \
+						  (8and(8equal(8S, 32), 8equal(8B, 0)), \
+						   8pair(8seq(8to_lit(8nat(2,5,5)), 8to_lit(8add(8nat(2,0,0), 8I))), 2)) \
+						  (8and(8equal(8S, 64), 8equal(8B, 1)), \
+						   8pair(8seq(8to_lit(8nat(7,3)), 8to_lit(8nat(2,5,5)), 8to_lit(8add(8nat(2,0,0), 8I))), 3)) \
+						  (8and(8equal(8S, 32), 8equal(8B, 1)), \
+						   8pair(8seq(8to_lit(8nat(6,5)), 8to_lit(8nat(2,5,5)), 8to_lit(8add(8nat(2,0,0), 8I))), 3)) \
+						  (8else, 8exit(0))))))
+
+#define ORDER_PP_DEF_0dec \
+  ORDER_PP_FN(8fn(8R, 8C,			\
+				  8let((8D, 0ppasm_insn_dec_generate_bytes_and_size(8R, 8C)), \
+					   0ppasm_asm_ctx_entry(8fn(8R, 8tuple_at_0(8D)), 8tuple_at_1(8D)))))
+
 
 #define ORDER_PP_DEF_0push \
   ORDER_PP_FN(8fn(8R, 8C,			\
@@ -96,6 +120,10 @@
   ORDER_PP_FN(8fn(8X, 8C, 				\
 		  8seq(8to_lit(8nat(1, 9, 5)))))
 
+
+#define ORDER_PP_DEF_0nop \
+	ORDER_PP_FN(8fn(8X, 8C, \
+					0ppasm_asm_ctx_entry(8fn(8R, 8seq(8to_lit(8nat(1,4,4)))), 1)))
 
 
 #define ORDER_PP_DEF_0label \
@@ -122,18 +150,6 @@
 #define ORDER_PP_DEF_0ppasm_asm_ctx_set_entries \
 	ORDER_PP_FN(8fn(8E, 8C, 8seq_set(0ppasm_asm_ctx_entries_key, 8C, 8E)))
 
-// #define ORDER_PP_DEF_0ppasm_asm_ctx_add_entry \
-// 	ORDER_PP_FN(8fn(8E, 8C, \
-// 					8let((8L, 0ppasm_asm_ctx_get_entries(8C)), \
-// 						 8let((8U, 0ppasm_asm_ctx_inc_pc(\
-// 														 0ppasm_asm_ctx_entry_get_byte_length(8E), \
-// 														 0ppasm_asm_ctx_set_entries(8seq_push_back(8E, 8L), 8C))), \
-// 							  8cond((0ppasm_asm_ctx_entry_has_label(8E), \
-// 									 0ppasm_asm_ctx_add_label( \
-// 															  0ppasm_asm_ctx_entry_get_label(8E). \
-// 															  0ppasm_asm_ctx_get_pc(8C), \
-// 															  8U)) \
-// 									(8else, 8U))))))
 
 #define ORDER_PP_DEF_0ppasm_asm_ctx_add_entry \
 	ORDER_PP_FN(8fn(8E, 8C, \

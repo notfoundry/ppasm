@@ -44,7 +44,9 @@
   ORDER_PP_FN(8fn(8S, 8E, \
 		  8with_assert(8equal(8seq_size(8S), 2), \
 			       8let((8K, 0ppasm_indop_parse_index_scale(8S))(8R, 0ppasm_indop_parse_index_reg(8S)), \
-				    0ppasm_indop_env_set_index(8R, 8K, 8E)))))
+						8if(8not(8and(0is_signed_int(8K), 0signed_int_sign(8K))) ,\
+							0ppasm_indop_env_set_index(8R, 8K, 8E), \
+							8exit(0))))))
 
 #define ORDER_PP_DEF_0ppasm_indop_parse_displacement \
   ORDER_PP_FN(8fn(8I, 8E, \
@@ -65,12 +67,14 @@
 							  8exit(0))) \
 				      (8is_lit(8X), 8if( \
 							8not(0ppasm_indop_env_has_offset(8E)), \
-							0ppasm_indop_parse_displacement(8lit_to_nat(8X), 8E), \
+							0ppasm_indop_parse_displacement(0positive(8lit_to_nat(8X)), 8E), \
 							8exit(0)))	\
 				      (8is_seq(8X), 8if( \
 							8not(0ppasm_indop_env_has_offset(8E)), \
-							0ppasm_indop_parse_displacement( \
-											8eval(8env_nil, 8adjacent(8(8nat), 8seq_to_tuple(8X))), 8E), \
+							8if(0is_signed_int(8X), \
+								0ppasm_indop_parse_displacement(8X, 8E), \
+								0ppasm_indop_parse_displacement( \
+																0positive(8seq_of_digits_to_nat(8X)), 8E)), \
 							8exit(0)))	\
 				      (8is_sym(8X), 0ppasm_indop_parse_base_or_index(8X, 8E)) \
 				      (8else, 8do(8put(8X), 8exit(0))))),		\

@@ -73,6 +73,6 @@
 											8eval(8env_nil, 8adjacent(8(8nat), 8seq_to_tuple(8X))), 8E), \
 							8exit(0)))	\
 				      (8is_sym(8X), 0ppasm_indop_parse_base_or_index(8X, 8E)) \
-				      (8else, 8exit(0)))),		\
+				      (8else, 8do(8put(8X), 8exit(0))))),		\
 			    8env_nil,			\
 			    8tuple_to_seq(8T))))
